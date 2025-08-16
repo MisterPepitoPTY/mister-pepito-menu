@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mister Pepito - ¿Ready para algo brutal?</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); /* Dark blue-grey gradient */
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: ‘’;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url(‘data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%23ff6b35" opacity="0.1"/></svg>’) repeat;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .logo-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: block;
+            object-fit: cover;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+            color: #ffffff; /* Changed to white for better contrast */
+        }
+
+        .header p {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            font-weight: bold;
+            position: relative;
+            z-index: 2;
+            color: #ffffff; /* Changed to white for better contrast */
+        }
+
+        .navigation {
+            background-color: #2a2a2a;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding: 0 1rem;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #ff8c00 0%, #e67e22 100%);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+            background: linear-gradient(135deg, #ff8c00 0%, #e67e22 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .category {
+            margin-bottom: 3rem;
+        }
+
+        .category-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #ff8c00;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            background: linear-gradient(145deg, #2a2a2a, #1e1e1e);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-8px);
+            border-color: #ff8c00;
+            box-shadow: 0 15px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .menu-item-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #ff8c00, #ff8c00);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .menu-item-content {
+            padding: 1.5rem;
+        }
+
+        .menu-item-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #ff8c00;
+            text-transform: uppercase;
+        }
+
+        .menu-item-description {
+            color: #cccccc;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .menu-item-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff8c00;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .section {
+            background: linear-gradient(145deg, #2a2a2a, #1e1e1e);
+            margin: 3rem 0;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            color: #ff8c00;
+            text-align: center;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-card {
+            background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid #ff8c00;
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
+        }
+
+        .info-card h3 {
+            color: #ff8c00;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-btn {
+            background: linear-gradient(135deg, #ff8c00 0%, #e67e22 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        .promo-banner {
+            background: linear-gradient(135deg, #ff8c00 0%, #e67e22 100%);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            margin: 2rem 0;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .promo-banner h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer {
+            background-color: #1a1a1a;
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: 3rem;
+            border-top: 3px solid #ff8c00;
+        }
+
+        .contact-info {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 1rem;
+        }
+
+        .contact-item {
+            background: linear-gradient(145deg, #2a2a2a, #1e1e1e);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid #ff8c00;
+        }
+
+        .contact-item h3 {
+            color: #ff8c00;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, #2a2a2a, #1e1e1e);
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            border: 2px solid #ff8c00;
+        }
+
+        .close {
+            color: #ff8c00;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #ff8c00;
+        }
+
+        .order-btn {
+            background: linear-gradient(135deg, #ff8c00 0%, #e67e22 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 1rem;
+            width: 100%;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .order-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        .reservation-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ff8c00;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #ff8c00;
+            border-radius: 10px;
+            background-color: #1e1e1e;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ff8c00;
+            box-shadow: 0 0 10px rgba(255, 107, 53, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category-title {
+                font-size: 1.8rem;
+            }
+
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <img src="imagenes/logo_mister_pepito.png" alt="Mister Pepito Logo" class="logo-img">
+        <h1>Mister Pepito</h1>
+        <p>¿Ready para algo brutal?</p>
+    </header>
+
+    <nav class="navigation">
+        <div class="nav-container">
+            <button class="nav-btn active" onclick="showSection('menu')">Menú</button>
+            <button class="nav-btn" onclick="showSection('ubicaciones')">Ubicaciones</button>
+            <button class="nav-btn" onclick="showSection('reservas')">Reservas</button>
+            <button class="nav-btn" onclick="showSection('promociones')">Promociones</button>
+            <button class="nav-btn" onclick="showSection('redes')">Redes Sociales</button>
+            <button class="nav-btn" onclick="showSection('contacto')">Contacto</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- SECCIÓN MENÚ -->
+        <div id="menu" class="main-section">
+            <div class="nav-container" style="margin-bottom: 2rem;">
+                <button class="nav-btn" onclick="showCategory('perros')">Perros Calientes</button>
+                <button class="nav-btn" onclick="showCategory('tequeños')">Tequeños</button>
+                <button class="nav-btn" onclick="showCategory('nuggets')">Nuggets</button>
+                <button class="nav-btn" onclick="showCategory('pepitos')">Pepitos</button>
+                <button class="nav-btn" onclick="showCategory('hamburguesas')">Hamburguesas</button>
+                <button class="nav-btn" onclick="showCategory('ensaladas')">Ensaladas</button>
+                <button class="nav-btn" onclick="showCategory('bebidas')">Bebidas</button>
+                <button class="nav-btn" onclick="showCategory('extras')">Extras</button>
+            </div>
+
+            <!-- Perros Calientes -->
+            <div id="perros" class="category">
+                <h2 class="category-title">Perros Calientes</h2>
+                <div class="menu-grid">
+                    <div class="menu-item" onclick="openModal('Perro Caliente', 'Pan de la casa, con una salchicha única, tomate, lechuga, cebolla y maíz, papas ralladas y parmesano', '$3.00')">
+                        <div class="menu-item-image">🌭</div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-name">Perro Caliente</div>
+                            <div class="menu-item-description">Pan de la casa, con una salchicha única, tomate, lechuga, cebolla y maíz, papas ralladas y parmesano</div>
+                            <div class="menu-item-price">$3.00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tequeños -->
+            <div id="tequeños" class="category hidden">
+                <h2 class="category-title">Tequeños</h2>
+                <div class="menu-grid">
+                    <div class="menu-item" onclick="openModal('Tequeños (5 unidades)', 'Los que nunca fallan! Queso con actitud', '$6.00')">
+                        <div class="menu-item-image">🧀</div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-name">Tequeños (5 unidades)</div>
+                            <div class="menu-item-description">Los que nunca fallan! Queso con actitud</div>
+                            <div class="menu-item-price">$6.00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nuggets -->
+            <div id="nuggets" class="category hidden">
+                <h2 class="category-title">Nuggets</h2>
+                <div class="menu-grid">
+                    <div class="menu-item" onclick="openModal('Nuggets', 'Super deliciosos. No te confundas... esto no es un snack, es un vicio con forma de nugget', '$7.50')">
+                        <div class="menu-item-image">🍗</div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-name">Nuggets</div>
+                            <div class="menu-item-description">Super deliciosos. No te confundas... esto no es un snack, es un vicio con forma de nugget</div>
+                            <div class="menu-item-price">$7.50</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pepitos -->
+            <div id="pepitos" class="category hidden">
+                <h2 class="category-title">Pepitos</h2>
+                <div class="menu-grid">
+                    <div class="menu-item" onclick="openModal('Pepito de Pollo', '300 gr de pollo acompañado de tomate, lechuga, queso parmesano, ketchup y mayonesa acompañado de sus papas fritas', '$8.50')">
+                        <div class="menu-item-image">🍖</div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-name">Pepito de Pollo</div>
+                            <div class="menu-item-description">300 gr de pollo acompañado de tomate, lechuga, queso parmesano, ketchup y mayonesa acompañado de sus papas fritas</div>
+                            <div class="menu-item-price">$8.50</div>
+                        </div>
+                    </div>
+                    <div class="menu-item" onclick="openModal('Pepito de Carne', '300 gr de carne acompañado de tomate, lechuga, queso parmesano, ketchup y mayonesa acompañado de sus papas fritas', '$8.50')">
+                        <div class="menu-item-image">🥩</div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-name">Pepito de Carne</div>
+                            <div class="menu-item-description">300 gr de carne acompañado de tomate, lechuga, queso parmesano, ketchup y mayonesa acompañado de sus papas fritas</div>
+                            <div class="menu-item-price">$8.50</div>
+                        </div>
+                    </div>
+                    <div class="menu-item" onclick="openModal('Pepito Mixto', '150 gr pollo, 150 gr de carne acompañado de tomate, lechuga, queso parmesano ketchup y mayonesa acompañado de sus papas fritas', '$8.50')">
+                        <div class="menu-item-image">🍽️</div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-name">Pepito Mixto</div>
+                            <div class="menu-item-description">150 gr pollo, 150 gr de carne acompañado de tomate, lechuga, queso parmesano ketchup y mayonesa acompañado de sus papas fritas</div>
+                            <div class="menu-item-price">$8.50</div>
+                        </div>
+                    </div>
+                    <div class="menu-item" onclick="openModal('Pepito Parrillero', '400 gr carne, pollo y chorizo parrillero con el toque especial las salsa de la casa con su queso parmesano acompañado de sus papas fritas', '$13.99')">
+                        <div class="menu-item-image">🔥</div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-name">Pepito Parrillero</div>
+                            <div class="menu-item-description">400 gr carne, pollo y chorizo parrillero con el toque especial "las salsa de la casa" con su queso parmesano acompañado de sus papas fritas</div>
+                            <div class="menu-item-price">$13.99</div>
+                        </div>
+                    </div>
+                    <div class="menu-item" onclick="openModal('Pepito 507', '300 gr carne, pollo o mixto, salteado con pimentón, cebolla en salsa de barbacoa, con queso amarillo y pepperoni acompañado de sus papas fritas', '$13.99')">
+                        <div class="menu-item-image">🌶️</div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-name">Pepito 507</div>
+                            <div class="menu-item-description">300 gr carne, pollo o mixto, salteado con pimentón, cebolla en salsa de barbacoa, con queso amarillo y pepperoni acompañado de sus papas fritas</div>
+                            <div class="menu-item-price">$13.99</div>
+                        </div>
+                    </div>
+                    <div class="menu-item" onclick="openModal('Pepito 4 Quesos', '300 gr carne, pollo o mixto, queso mozzarella, queso amarillo, queso fundido, queso parmesano acompañado de sus papas fritas', '$12.00')">
+                        <div class="menu-item-image">🧀</div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-name">Pepito 4 Quesos</div>
+                            <div class="menu-item-description">300 gr carne, pollo o mixto, queso mozzarella, queso amarillo, queso fundido, queso parmesano acompañado de sus papas fritas</div>
+                            <div class="menu-item-price">$12.00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hamburguesas -->
+            <div id="hamburguesas" class="category hidden">
+                <h2 class="category-title">Hamburguesas</h2>
+                <div class="menu-grid">
+                    <div class="menu-item" onclick="openModal('Hamburguesa Sencilla', 'Media libra de carne, queso facilita, tomate, lechuga, ketchup y mayonesa acompañado de sus papas fritas', '$8.50')">
+                        <div class="menu-item-image">🍔</div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-name">Hamburguesa Sencilla</div>
+                            <div class="menu-item-description">Media libra de carne, queso facilita, tomate, lechuga, ketchup y mayonesa acompañado de sus papas fritas</div>
+                            <div class="menu-item-price">$8.50</div>
+                        </div>
+                    </div>
+                    <div class="menu-item" onclick="openModal('Hamburguesa de Pollo', 'Milanesa de pollo, queso facilita, tomate, lechuga, bacon, ketchup y mayonesa acompañado de sus papas fritas', '$8.50')">
+                        <div class="menu-item-image">🍗</div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-name">Hamburguesa de Pollo</div>
+                            <div class="menu-item-description">Milanesa de pollo, queso facilita, tomate, lechuga, bacon, ketchup y mayonesa acompañado de sus papas fritas</div>
+                            <div class="menu-item-price">$8.50</div>
+                        </div>
+                    </div>
+                    <div class="menu-item" onclick="openModal('La Doble', '1 libra de carne angus o ½ carne angus y milanesa de pollo, triple queso facilita, bacon, tomate, lechuga ketchup y mayonesa acompañado de sus papas fritas', '$16.00')">
+                        <div class="menu-item-image">🍔</div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-name">La Doble</div>
+                            <div class="menu-item-description">1 libra de carne angus o ½ carne angus y milanesa de pollo, triple queso facilita, bacon, tomate, lechuga ketchup y mayonesa acompañado de sus papas fritas</div>
+                            <div class="menu-item-price">$16.00</div>
+                        </div>
+                    </div>
+                    <div class="menu-item" onclick="openModal('Hamburguesa Callejera', 'Media libra de carne angus, chorizo parrillero, pico de gallo, queso facilita, bacon, y salsa tártara acompañada de sus papas fritas', '$13.00')">
+                        <div class="menu-item-image">🌭</div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-name">Hamburguesa Callejera</div>
+                            <div class="menu-item-description">Media libra de carne angus, chorizo parrillero, pico de gallo, queso facilita, bacon, y salsa tártara acompañada de sus papas fritas</div>
+                            <div class="menu-item-price">$13.00</div>
+                        </div>
+                    </div>
+                    <div class="menu-item" onclick="openModal('Hamburguesa Camarroncio', '200 gr de camarón fresco, aguacate queso, bacon, lechuga, queso facilita, tomate y salsa rosada acompañada de sus papas fritas', '$11.00')">
+                        <div class="menu-item-image">🦐</div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-name">Hamburguesa Camarroncio</div>
+                            <div class="menu-item-description">200 gr de camarón fresco, aguacate queso, bacon, lechuga, queso facilita, tomate y salsa rosada acompañada de sus papas fritas</div>
+                            <div class="menu-item-price">$11.00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ensaladas -->
+            <div id="ensaladas" class="category hidden">
+                <h2 class="category-title">Ensaladas</h2>
+                <div class="menu-grid">
+                    <div class="menu-item" onclick="openModal('César con Pollo', 'Crujiente lechuga romana mezclada con aderezo césar cremoso, queso parmesano fresco y crocantes crutones de pan artesanal', '$8.99')">
+                        <div class="menu-item-image">🥗</div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-name">César con Pollo</div>
+                            <div class="menu-item-description">Crujiente lechuga romana mezclada con aderezo césar cremoso, queso parmesano fresco y crocantes crutones de pan artesanal</div>
+                            <div class="menu-item-price">$8.99</div>
+                        </div>
+                    </div>
+                    <div class="menu-item" onclick="openModal('Mixta Pollo y Camarones', 'Nuestra tradicional ensalada césar, acompañada de jugosos camarones salteados a la plancha, que aportan un toque marino y delicado al sabor clásico', '$10.99')">
+                        <div class="menu-item-image">🦐</div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-name">Mixta Pollo y Camarones</div>
+                            <div class="menu-item-description">Nuestra tradicional ensalada césar, acompañada de jugosos camarones salteados a la plancha, que aportan un toque marino y delicado al sabor clásico</div>
+                            <div class="menu-item-price">$10.99</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bebidas -->
+            <div id="bebidas" class="category hidden">
+                <h2 class="category-title">Bebidas</h2>
+                <div class="menu-grid">
+                    <div class="menu-item" onclick="openModal('Jugos Naturales', 'Fresa, Guanábana, Limón con Hierba Buena, Maracuyá, Tomate de Árbol, Mango, Limón, Mora', '$2.75 - $3.00')">
+                        <div class="menu-item-image">🥤</div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-name">Jugos Naturales</div>
+                            <div class="menu-item-description">Fresa, Guanábana, Limón con Hierba Buena, Maracuyá, Tomate de Árbol, Mango, Limón, Mora</div>
+                            <div class="menu-item-price">$2.75 - $3.00</div>
+                        </div>
+                    </div>
+                    <div class="menu-item" onclick="openModal('Gaseosas', 'Coca Cola, Canada Dry, Fanta (Uva, Naranja, Manzana), 7UP, Maltín', '$1.50')">
+                        <div class="menu-item-image">🥤</div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-name">Gaseosas</div>
+                            <div class="menu-item-description">Coca Cola, Canada Dry, Fanta (Uva, Naranja, Manzana), 7UP, Maltín</div>
+                            <div class="menu-item-price">$1.50</div>
+                        </div>
+                    </div>
+                    <div class="menu-item" onclick="openModal('Agua', 'Agua natural', '$1.00')">
+                        <div class="menu-item-image">💧</div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-name">Agua</div>
+                            <div class="menu-item-description">Agua natural</div>
+                            <div class="menu-item-price">$1.00</div>
+                        </div>
+                    </div>
+                    <div class="menu-item" onclick="openModal('Té Frío', 'Vaso 14 oz o Media Jarra', '$1.50 - $4.00')">
+                        <div class="menu-item-image">🧊</div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-name">Té Frío</div>
+                            <div class="menu-item-description">Vaso 14 oz o Media Jarra</div>
+                            <div class="menu-item-price">$1.50 - $4.00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Extras -->
+            <div id="extras" class="category hidden">
+                <h2 class="category-title">Extras</h2>
+                <div class="menu-grid">
+                    <div class="menu-item" onclick="openModal('Papas Fritas', 'Porción de papas fritas', '$3.00')">
+                        <div class="menu-item-image">🍟</div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-name">Papas Fritas</div>
+                            <div class="menu-item-description">Porción de papas fritas</div>
+                            <div class="menu-item-price">$3.00</div>
+                        </div>
+                    </div>
+                    <div class="menu-item" onclick="openModal('Quesos', 'Parmesano, Mozzarella, Cheddar', '$1.00 - $2.00')">
+                        <div class="menu-item-image">🧀</div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-name">Quesos</div>
+                            <div class="menu-item-description">Parmesano, Mozzarella, Cheddar</div>
+                            <div class="menu-item-price">$1.00 - $2.00</div>
+                        </div>
+                    </div>
+                    <div class="menu-item" onclick="openModal('Carnes Adicionales', 'Carne, Pollo, Chuleta, Camarón', '$3.00 - $4.00')">
+                        <div class="menu-item-image">🥩</div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-name">Carnes Adicionales</div>
+                            <div class="menu-item-description">Carne, Pollo, Chuleta, Camarón</div>
+                            <div class="menu-item-price">$3.00 - $4.00</div>
+                        </div>
+                    </div>
+                    <div class="menu-item" onclick="openModal('Otros Extras', 'Bacon, Papas Rayadas, Maíz, Champiñón, Salsa', '$0.75 - $1.50')">
+                        <div class="menu-item-image">🥓</div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-name">Otros Extras</div>
+                            <div class="menu-item-description">Bacon, Papas Rayadas, Maíz, Champiñón, Salsa</div>
+                            <div class="menu-item-price">$0.75 - $1.50</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN UBICACIONES -->
+        <div id="ubicaciones" class="main-section hidden">
+            <div class="section">
+                <h2>Nuestras Ubicaciones</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>📍 Sede Principal</h3>
+                        <p><strong>Plaza Jolie, Vía Porras</strong></p>
+                        <p>Detrás del PriceSmart</p>
+                        <p>Panamá, Panamá</p>
+                        <br>
+                        <p><strong>Horarios:</strong></p>
+                        <p>Domingo a Miércoles: 5:00 PM - 11:00 PM</p>
+                        <p>Jueves a Sábados: 5:00 PM - 12:00 AM</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>🚗 Delivery</h3>
+                        <p><strong>Pedidos a Domicilio</strong></p>
+                        <p>📞 6106-0987</p>
+                        <p>Cobertura en toda la ciudad</p>
+                        <p>Tiempo estimado: 30-45 min</p>
+                        <br>
+                        <button class="order-btn" onclick="window.open('https://wa.me/50761060987', '_blank')">
+                            📱 Pedir por WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN RESERVAS -->
+        <div id="reservas" class="main-section hidden">
+            <div class="section">
+                <h2>Reservaciones</h2>
+                <p style="text-align: center; margin-bottom: 2rem; font-size: 1.2rem;">
+                    ¡Reserva tu mesa y asegura tu lugar para disfrutar de algo brutal!
+                </p>
+                
+                <div class="reservation-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="nombre">Nombre Completo:</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="telefono">Teléfono:</label>
+                            <input type="tel" id="telefono" name="telefono" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="fecha">Fecha:</label>
+                            <input type="date" id="fecha" name="fecha" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="hora">Hora:</label>
+                            <select id="hora" name="hora" required>
+                                <option value="">Selecciona una hora</option>
+                                <option value="11:00">11:00 AM</option>
+                                <option value="12:00">12:00 PM</option>
+                                <option value="13:00">1:00 PM</option>
+                                <option value="14:00">2:00 PM</option>
+                                <option value="15:00">3:00 PM</option>
+                                <option value="16:00">4:00 PM</option>
+                                <option value="17:00">5:00 PM</option>
+                                <option value="18:00">6:00 PM</option>
+                                <option value="19:00">7:00 PM</option>
+                                <option value="20:00">8:00 PM</option>
+                                <option value="21:00">9:00 PM</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="personas">Número de Personas:</label>
+                            <select id="personas" name="personas" required>
+                                <option value="">Selecciona</option>
+                                <option value="1">1 persona</option>
+                                <option value="2">2 personas</option>
+                                <option value="3">3 personas</option>
+                                <option value="4">4 personas</option>
+                                <option value="5">5 personas</option>
+                                <option value="6">6 personas</option>
+                                <option value="7">7 personas</option>
+                                <option value="8">8 personas</option>
+                                <option value="9+">Más de 8 personas</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="comentarios">Comentarios Especiales:</label>
+                            <textarea id="comentarios" name="comentarios" rows="4" placeholder="Ocasión especial, alergias, preferencias de mesa, etc."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="order-btn">
+                            📅 Confirmar Reservación
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN PROMOCIONES -->
+        <div id="promociones" class="main-section hidden">
+            <div class="section">
+                <h2>Promociones Especiales</h2>
+                
+                <div class="promo-banner">
+                    <h3>🔥 ¡COMBO BRUTAL! 🔥</h3>
+                    <p>Hamburguesa Sencilla + Perro Caliente + Té Frío + Papas Fritas</p>
+                    <p style="font-size: 1.5rem; margin-top: 1rem;"><strong>Solo $6.99</strong></p>
+                    <p style="font-size: 0.9rem; opacity: 0.8;">*Válido Lunes y Martes</p>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>🍔 Lunes y Martes Especial</h3>
+                        <p>2 Pepitos Tradicionales + Papas + Té Frío</p>
+                        <p><strong>Solo $18.99</strong></p>
+                        <p>*Pepitos de Pollo, Carne o Mixto</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>🥤 Jueves de Bebidas</h3>
+                        <p>Jugos naturales a $2.00</p>
+                        <p><strong>Todos los jueves</strong></p>
+                        <p>*Todos los sabores disponibles</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>🎉 Viernes Brutal</h3>
+                        <p>Happy Hour: 15% descuento</p>
+                        <p><strong>Viernes 5:00 PM - 7:00 PM</strong></p>
+                        <p>*En todo el menú</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>👨‍👩‍👧‍👦 Fin de Semana Familiar</h3>
+                        <p>Menú infantil gratis</p>
+                        <p><strong>Sábados y Domingos</strong></p>
+                        <p>*Por cada 2 adultos, 1 niño come gratis</p>
+                    </div>
+                </div>
+
+                <div class="promo-banner" style="margin-top: 2rem;">
+                    <h3>🎂 ¡CUMPLEAÑEROS! 🎂</h3>
+                    <p>Presenta tu cédula el día de tu cumpleaños</p>
+                    <p style="font-size: 1.3rem; margin-top: 1rem;"><strong>¡Tu comida es GRATIS!</strong></p>
+                    <p style="font-size: 0.9rem; opacity: 0.8;">*Válido para platos hasta $15.00</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN REDES SOCIALES -->
+        <div id="redes" class="main-section hidden">
+            <div class="section">
+                <h2>Síguenos en Redes Sociales</h2>
+                <p style="text-align: center; margin-bottom: 2rem; font-size: 1.2rem;">
+                    ¡Mantente al día con nuestras promociones y novedades!
+                </p>
+                
+                <div class="social-links">
+                    <a href="https://www.tiktok.com/@mister.pepito01" class="social-btn" target="_blank">
+                        🎵 TikTok
+                    </a>
+                    <a href="https://www.instagram.com/mister.pepitopty/" class="social-btn" target="_blank">
+                        📷 Instagram
+                    </a>
+                    <a href="https://wa.me/50761060987" class="social-btn">
+                        📱 WhatsApp
+                    </a>
+                </div>
+
+                <div class="info-grid" style="margin-top: 3rem;">
+                    <div class="info-card">
+                        <h3>🎵 TikTok</h3>
+                        <p>@mister.pepito01</p>
+                        <p>Videos divertidos, recetas rápidas y el día a día de Mister Pepito</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>📷 Instagram</h3>
+                        <p>@mister.pepitopty</p>
+                        <p>Stories diarios, behind the scenes y los mejores momentos de nuestros clientes</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>📱 WhatsApp Business</h3>
+                        <p>6106-0987</p>
+                        <p>Pedidos a domicilio, reservaciones y atención personalizada</p>
+                    </div>
+                </div>
+
+                <div class="promo-banner" style="margin-top: 2rem;">
+                    <h3>📸 ¡COMPARTE TU EXPERIENCIA! 📸</h3>
+                    <p>Sube una foto con tu plato favorito y etiquétanos</p>
+                    <p style="font-size: 1.2rem; margin-top: 1rem;"><strong>¡Gana un 10% de descuento en tu próxima visita!</strong></p>
+                    <p style="font-size: 0.9rem; opacity: 0.8;">*Usa #MisterPepitoBrutal</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN CONTACTO -->
+        <div id="contacto" class="main-section hidden">
+            <div class="section">
+                <h2>Contacto</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>📍 Dirección</h3>
+                        <p><strong>Plaza Jolie, Vía Porras</strong></p>
+                        <p>Detrás del PriceSmart</p>
+                        <p>Panamá, Panamá</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>📞 Teléfonos</h3>
+                        <p><strong>Pedidos a Domicilio:</strong></p>
+                        <p>6106-0987</p>
+                        <p><strong>Reservaciones:</strong></p>
+                        <p>6106-0987</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>🕒 Horarios</h3>
+                        <p><strong>Domingo a Miércoles:</strong></p>
+                        <p>5:00 PM - 11:00 PM</p>
+                        <p><strong>Jueves a Sábados:</strong></p>
+                        <p>5:00 PM - 12:00 AM</p>
+                        <p><strong>Delivery hasta:</strong></p>
+                        <p>9:30 PM</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>💳 Métodos de Pago</h3>
+                        <p>• Efectivo</p>
+                        <p>• Tarjetas de Crédito/Débito</p>
+                        <p>• Transferencias</p>
+                        <p>• Yappy</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; text-align: center;">
+                    <button class="order-btn" onclick="window.open('https://wa.me/50761060987', '_blank')" style="display: inline-block; width: auto; padding: 1rem 3rem;">
+                        📱 Contactar por WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="contact-info">
+            <div class="contact-item">
+                <h3>📍 Ubicación</h3>
+                <p>Plaza Jolie, Vía Porras<br>Detrás del PriceSmart<br>Panamá, Panamá</p>
+            </div>
+            <div class="contact-item">
+                <h3>📞 Pedidos</h3>
+                <p>6106-0987</p>
+                <p>WhatsApp disponible</p>
+            </div>
+            <div class="contact-item">
+                <h3>🕒 Horarios</h3>
+                <p>Dom-Mié: 5:00 PM - 11:00 PM</p>
+                <p>Jue-Sáb: 5:00 PM - 12:00 AM</p>
+                <p>Delivery hasta 9:30 PM</p>
+            </div>
+        </div>
+        <p style="margin-top: 2rem; opacity: 0.7;">© 2024 Mister Pepito. ¿Ready para algo brutal?</p>
+    </footer>
+
+    <!-- Modal -->
+    <div id="itemModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalDescription"></p>
+            <p id="modalPrice" style="font-size: 1.5rem; color: #ff8c00; font-weight: bold; margin-top: 1rem;"></p>
+            <button class="order-btn" onclick="orderItem()">🛒 Agregar al Pedido</button>
+        </div>
+    </div>
+
+    <script>
+        function showSection(section) {
+            // Ocultar todas las secciones principales
+            const sections = document.querySelectorAll('.main-section');
+            sections.forEach(sec => sec.classList.add('hidden'));
+            
+            // Remover clase active de todos los botones principales
+            const buttons = document.querySelectorAll('.navigation .nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Mostrar sección seleccionada
+            document.getElementById(section).classList.remove('hidden');
+            
+            // Agregar clase active al botón clickeado
+            event.target.classList.add('active');
+
+            // Si es la sección menú, mostrar la primera categoría por defecto
+            if (section === 'menu') {
+                showCategory('perros');
+            }
+        }
+
+        function showCategory(category) {
+            // Ocultar todas las categorías del menú
+            const categories = document.querySelectorAll('.category');
+            categories.forEach(cat => cat.classList.add('hidden'));
+            
+            // Mostrar categoría seleccionada
+            document.getElementById(category).classList.remove('hidden');
+        }
+
+        function openModal(title, description, price) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalDescription').textContent = description;
+            document.getElementById('modalPrice').textContent = price;
+            document.getElementById('itemModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('itemModal').style.display = 'none';
+        }
+
+        function orderItem() {
+            const title = document.getElementById('modalTitle').textContent;
+            const message = `¡Hola! Me interesa ordenar: ${title}`;
+            const whatsappUrl = `https://wa.me/50761060987?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            closeModal();
+        }
+
+        // Cerrar modal al hacer clic fuera de él
+        window.onclick = function(event) {
+            const modal = document.getElementById('itemModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Manejar envío del formulario de reservaciones
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const nombre = formData.get('nombre');
+            const telefono = formData.get('telefono');
+            const fecha = formData.get('fecha');
+            const hora = formData.get('hora');
+            const personas = formData.get('personas');
+            const comentarios = formData.get('comentarios');
+            
+            const message = `🍽️ *RESERVACIÓN MISTER PEPITO* 🍽️\n\n` +
+                           `👤 *Nombre:* ${nombre}\n` +
+                           `📞 *Teléfono:* ${telefono}\n` +
+                           `📅 *Fecha:* ${fecha}\n` +
+                           `🕐 *Hora:* ${hora}\n` +
+                           `👥 *Personas:* ${personas}\n` +
+                           `💬 *Comentarios:* ${comentarios || 'Ninguno'}\n\n` +
+                           `¡Gracias por elegir Mister Pepito! 🌶️`;
+            
+            const whatsappUrl = `https://wa.me/50761060987?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            
+            // Limpiar formulario
+            this.reset();
+            alert('¡Reservación enviada! Te contactaremos pronto para confirmar.');
+        });
+
+        // Inicializar mostrando el menú
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('menu');
+        });
+    </script>
+</body>
+</html>
+
